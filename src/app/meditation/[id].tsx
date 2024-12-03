@@ -7,15 +7,26 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-
 import { View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import Slider from "@react-native-community/slider";
+import { useAudioPlayer, useAudioPlayerStatus } from "expo-audio";
+import AudioFile from "../../../assets/meditations/medi.mp3"
 
 export default function MeditationDetails() {
     const { id } = useLocalSearchParams<{ id: string }>();
     const { top } = useSafeAreaInsets();
+    const player = useAudioPlayer(AudioFile);
+    const status= useAudioPlayerStatus(player);
+
     const meditation = meditations.find(m => m.id === Number(id))
+
+    const formatSeconds=(milliseconds:number)=>{
+      const minutes=Math.floor(milliseconds/60000);
+      const seconds= Math.floor((milliseconds % 60000)/1000);
+      return `${minutes}:${seconds.toString().padStart(2,'0')}`;
+    }
+
     if (!meditation) {
         return <Text>No meditation found</Text>
     }
@@ -37,8 +48,10 @@ export default function MeditationDetails() {
                 </View>
 
 
-                <Pressable className="bg-zinc-800 self-center aspect-square w-20 items-center justify-center  rounded-full" >
-                    <FontAwesome6 name="pause" size={24} color="white" />
+                <Pressable onPress={() => {
+                    player.playing ? player.pause() : player.play();
+                }} className="bg-zinc-800 self-center aspect-square w-20 items-center justify-center  rounded-full" >
+                    <FontAwesome6 name={status.playing?"pause":"play"} size={24} color="white" />
                 </Pressable>
 
                 <View className="flex-1">
@@ -53,16 +66,16 @@ export default function MeditationDetails() {
                     <Slider
                         style={{ width: '100%', height: 20 }}
                         minimumValue={0}
-                        value={0.5}
-                        onSlidingComplete={(value)=>console.log(value)}
+                        value={status.currentTime/status.duration}
+                        onSlidingComplete={(value) => console.log(value)}
                         maximumValue={1}
                         minimumTrackTintColor="#3a3937F"
                         maximumTrackTintColor="#000000"
                         thumbTintColor="#3a3937"
                     />
                     <View className="flex-row justify-between">
-                        <Text>10:12</Text>
-                        <Text>10:12</Text>
+                        <Text>{formatSeconds(status.currentTime)}</Text>
+                        <Text>{formatSeconds(status.duration)}</Text>
                     </View>
 
                 </View>
