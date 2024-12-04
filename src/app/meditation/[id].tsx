@@ -12,6 +12,7 @@ import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import Slider from "@react-native-community/slider";
 import { useAudioPlayer, useAudioPlayerStatus } from "expo-audio";
 import AudioFile from "../../../assets/meditations/medi.mp3"
+import AnimatedBackground from "../../components/AnimatedBackground";
 
 export default function MeditationDetails() {
     const { id } = useLocalSearchParams<{ id: string }>();
@@ -32,6 +33,7 @@ export default function MeditationDetails() {
     }
     return (
         <SafeAreaView className="bg-orange-400 flex-1 justify-between">
+            <AnimatedBackground/>
             <View className="flex-1 p-10">
                 <View className="flex-1">
                     <View className="flex-row items-center justify-between ">
@@ -43,7 +45,7 @@ export default function MeditationDetails() {
                             onPress={() => router.back()}
                             size={20} name="close" color="black" />
                     </View>
-                    <Text className="text-3xl text-center font-semibold text-zinc-800">Meditation details{meditation?.title}</Text>
+                    <Text className="text-3xl text-center font-semibold text-zinc-800 top-10">{meditation?.title}</Text>
 
                 </View>
 
@@ -67,7 +69,9 @@ export default function MeditationDetails() {
                         style={{ width: '100%', height: 20 }}
                         minimumValue={0}
                         value={status.currentTime/status.duration}
-                        onSlidingComplete={(value) => console.log(value)}
+                        onSlidingComplete={(value) =>{
+                            player.seekTo(value * status.duration)
+                        }}
                         maximumValue={1}
                         minimumTrackTintColor="#3a3937F"
                         maximumTrackTintColor="#000000"

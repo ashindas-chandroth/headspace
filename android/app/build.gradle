@@ -93,6 +93,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
     }
     signingConfigs {
         debug {
@@ -124,6 +127,11 @@ android {
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
     }
+//    externalNativeBuild {
+//        cmake {
+//            version "3.31.0" // Adjust based on installed version
+//        }
+//    }
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
