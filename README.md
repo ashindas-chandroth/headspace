@@ -28,7 +28,7 @@ Ensure you have the following tools installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/headspace.git
+   git clone https://github.com/im-indian-techie/headspace.git
    cd headspace
    ```
 
