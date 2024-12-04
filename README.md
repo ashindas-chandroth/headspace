@@ -8,7 +8,7 @@ A modern and sleek React Native application built with **Expo**, **Reanimated**,
 - ⚡ Built on **Expo** for a streamlined development experience.
 - 🎥 Smooth animations with **React Native Reanimated**.
 - 💅 Tailwind-inspired styling using **NativeWind**.
-- Audio player using **Expo-audio**.
+- 🔊 Audio player using **Expo-audio**.
 - 🌐 Cross-platform compatibility for iOS and Android.
 
 ---
