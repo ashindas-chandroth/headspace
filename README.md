@@ -122,4 +122,4 @@ This project is licensed under the [MIT License](LICENSE).
 For inquiries, feel free to reach out:
 
 - **Email**: ashindaschandroth97@gmail.com
-- **GitHub**: [im-indian-techie](https://github.com/im-indian-techie)
+- **GitHub**: [Ashindas Chandroth](https://github.com/im-indian-techie)
